@@ -4,11 +4,23 @@
 \alias{gan}
 \title{GAN}
 \usage{
-gan(data, epochs = 500, batch_size = 32, model_name = "gan_r",
-  continue_training = FALSE, trace = 100)
+gan(data, file = "./Python/gan.py", epochs = 500, batch_size = 32,
+  model_name = "gan_r", continue_training = FALSE, trace = 100)
 }
 \arguments{
-\item{batch_size}{}
+\item{data}{Training data in the form of a matrix. Each row is an observation, each column is a time point.}
+
+\item{file}{Location of the python file containing the GAN functions}
+
+\item{epochs}{Number of epochs. Default 500}
+
+\item{batch_size}{Batch size for each training iteration}
+
+\item{model_name}{Name of the model to submit to Python. Default 'gan_r'.}
+
+\item{continue_training}{Logical. If you want to continue to train a model set to TRUE.}
+
+\item{trace}{Frequency at which to write to the log. Convenient to monitor progress. Logs saved at './log/' in package directory}
 }
 \description{
 Runs the GAN in Python and returns the results

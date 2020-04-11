@@ -149,7 +149,6 @@ class GAN():
                 # generate sequences and take a sample of real sequences from the training data of the same size
                 generated_sequences = self.generator.predict(noise)
                 batch = self.x_train[np.random.randint(low = 0, high = self.x_train.shape[0], size = batch_size)]
-                # batch = self.x_train[:batch_size]
                 x = np.concatenate([batch, generated_sequences])
                 
                 # create labels for the real and generated sequences
@@ -174,9 +173,6 @@ class GAN():
                 self.slice_generated_sequence(k)
 
         
-        
-# lstm_gan = GAN()
-# lstm_gan.train(epochs = 50, batch_size = 32, path = 'plots/')
 
 
         
