@@ -73,7 +73,7 @@ gan <- function(data, file = system.file("python/gan.py", package = "rgan"),
 
 
 
-#' Plot a set of curves
+#' Plot a set of waves
 #'
 #' For inspecting the output
 #'
@@ -90,7 +90,7 @@ gan <- function(data, file = system.file("python/gan.py", package = "rgan"),
 #' @importFrom stringr str_extract
 #'
 #' @examples
-plot_curves <- function(data, id = 1:2, nrow = NULL) {
+plot_waves <- function(data, id = 1:2, nrow = NULL) {
 
   if(is.list(data)) data = data[[length(data)]]
 

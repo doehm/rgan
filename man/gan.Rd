@@ -4,8 +4,9 @@
 \alias{gan}
 \title{GAN}
 \usage{
-gan(data, file = "./Python/gan.py", epochs = 500, batch_size = 32,
-  model_name = "gan_r", continue_training = FALSE, trace = 100)
+gan(data, file = system.file("python/gan.py", package = "rgan"),
+  epochs = 500, batch_size = 32, model_name = "gan_r",
+  continue_training = FALSE, trace = 100)
 }
 \arguments{
 \item{data}{Training data in the form of a matrix. Each row is an observation, each column is a time point.}
