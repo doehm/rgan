@@ -50,7 +50,8 @@ get_training_data <- function(n = 200, m = 250, shape = list(a = c(1, 3), p = c(
 #' @importFrom glue glue
 #'
 #' @examples
-gan <- function(data, file = "./Python/gan.py", epochs = 500, batch_size = 32, model_name = "gan_r", continue_training = FALSE, trace = 100) {
+gan <- function(data, file = list.files(system.file("python", package = "rgan"), full.names = TRUE),
+                epochs = 500, batch_size = 32, model_name = "gan_r", continue_training = FALSE, trace = 100) {
   x_train <<- data
   py_run_file(file)
   if(!continue_training) message("python GAN object saved as 'gan_r'\naccess by py$gan_r e.g. py$gan_r$details()")
