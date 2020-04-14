@@ -15,11 +15,11 @@
 #' @examples
 get_training_data <- function(n = 200, m = 250, shape = list(a = c(1, 3), p = c(2, 10))) {
   mat <- matrix(NA, nrow = n, ncol = m)
-  y <- rep(NA, n)
+  n_waves <- length(shape$a)
   for(k in 1:n){
-    ak <- shape$a[k %% 2 + 1]
-    pk <- shape$p[k %% 2 + 1]
-    mat[k,] <- ak*sin(2*pi*(1:m)/m*pk) + rnorm(m, 0, 0.05)
+    ak <- shape$a[(k-1) %% n_waves + 1]
+    pk <- shape$p[(k-1) %% n_waves + 1]
+    mat[k,] <- ak*sin(2*pi*seq(0, 1, length = 250)*pk) + rnorm(m, 0, 0.05)
   }
   mat
 }
@@ -50,7 +50,7 @@ get_training_data <- function(n = 200, m = 250, shape = list(a = c(1, 3), p = c(
 #' @importFrom glue glue
 #'
 #' @examples
-gan <- function(data, file = list.files(system.file("python", package = "rgan"), full.names = TRUE),
+gan <- function(data, file = system.file("python/gan.py", package = "rgan"),
                 epochs = 500, batch_size = 32, model_name = "gan_r", continue_training = FALSE, trace = 100) {
   x_train <<- data
   py_run_file(file)
