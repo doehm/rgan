@@ -12,7 +12,7 @@ get_training_data(n = 200, m = 250, shape = list(a = c(1, 3), p =
 
 \item{m}{Number of points to evaluate the sine waves}
 
-\item{shape}{List of shape parameters for the two sine waves. \code{a} amplitude; \code{p} period factor i.e. how many cycles}
+\item{shape}{List of shape parameters for the two sine waves. \code{a} amplitude; \code{p} period}
 }
 \description{
 Generates training data for testing the GAN. Function generates two sine waves with different periods and amplitudes

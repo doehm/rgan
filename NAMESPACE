@@ -2,6 +2,11 @@
 
 export(gan)
 export(get_training_data)
+export(plot_curves)
+import(dplyr)
+import(ggplot2)
 importFrom(glue,glue)
 importFrom(reticulate,py_run_file)
 importFrom(reticulate,py_run_string)
+importFrom(stringr,str_extract)
+importFrom(tidyr,gather)

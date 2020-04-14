@@ -7,7 +7,7 @@
 #'
 #' @param n Number of waves
 #' @param m Number of points to evaluate the sine waves
-#' @param shape List of shape parameters for the two sine waves. \code{a} amplitude; \code{p} period factor i.e. how many cycles
+#' @param shape List of shape parameters for the two sine waves. \code{a} amplitude; \code{p} period
 #'
 #' @return
 #' @export
@@ -72,4 +72,50 @@ gan <- function(data, file = "./Python/gan.py", epochs = 500, batch_size = 32, m
 
 
 
+#' Plot a set of curves
+#'
+#' For inspecting the output
+#'
+#' @param data x_train
+#' @param id which rows to plot. Defaults to 1:2
+#' @param nrow Number of rows in facet_wrap
+#'
+#' @return
+#' @export
+#'
+#' @import ggplot2
+#' @import dplyr
+#' @importFrom tidyr gather
+#' @importFrom stringr str_extract
+#'
+#' @examples
+plot_curves <- function(data, id = 1:2, nrow = NULL) {
+
+  if(is.list(data)) data = data[[length(data)]]
+
+  data[id,] %>%
+    t() %>%
+    as_tibble() %>%
+    mutate(x = 1:n()) %>%
+    gather("series", "y", -x) %>%
+    mutate(id = as.numeric(str_extract(series, "[[:digit:]]+"))) %>%
+    group_by(series) %>%
+    mutate(sd = sd(diff(y))) %>%
+    as.data.frame() %>%
+    ggplot(aes(x = x, y = y, col = sd)) +
+    geom_line() +
+    facet_wrap(~series, nrow = nrow) +
+    theme_minimal() +
+    theme(
+      axis.title = element_blank(),
+      strip.text = element_blank(),
+      legend.position = "none",
+      plot.title = element_text(family = "userfont", hjust = 0.5, size = 24),
+      plot.subtitle = element_text(family = "userfont", hjust = 0.5, size = 12),
+      axis.text.x = element_blank(),
+      panel.grid.major.x = element_blank(),
+      panel.grid.minor.x = element_blank()
+    ) +
+    coord_cartesian(ylim = c(-3, 3))
+}
 
